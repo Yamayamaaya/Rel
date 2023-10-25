@@ -11,7 +11,7 @@ fi
 # Constants
 REPO_USERNAME="Yamayamaaya"
 REPO_NAME="Rel"
-SCRIPT_NAME="rel.sh"
+SCRIPT_NAME="src/rel.sh"
 INSTALL_PATH="/usr/local/bin"
 
 # Download the script from GitHub
