@@ -11,11 +11,11 @@ fi
 # Constants
 REPO_USERNAME="Yamayamaaya"
 REPO_NAME="Rel"
-SCRIPT_NAME="src/rel.sh"
+SCRIPT_NAME="rel.sh"
 INSTALL_PATH="/usr/local/bin"
 
 # Download the script from GitHub
-curl -sSL "https://raw.githubusercontent.com/$REPO_USERNAME/$REPO_NAME/master/src/$SCRIPT_NAME" -o "$SCRIPT_NAME"
+curl -sSL "https://raw.githubusercontent.com/$REPO_USERNAME/$REPO_NAME/main/src/$SCRIPT_NAME" -o "$SCRIPT_NAME"
 
 # Make the downloaded script executable
 chmod +x "$SCRIPT_NAME"
