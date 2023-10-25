@@ -12,7 +12,7 @@ fi
 REPO_USERNAME="Yamayamaaya"
 REPO_NAME="Rel"
 SCRIPT_NAME="rel.sh"
-INSTALL_PATH="/usr/local/bin"
+INSTALL_PATH="/usr/local/bin/rel"
 
 # Download the script from GitHub
 curl -sSL "https://raw.githubusercontent.com/$REPO_USERNAME/$REPO_NAME/main/src/$SCRIPT_NAME" -o "$SCRIPT_NAME"
