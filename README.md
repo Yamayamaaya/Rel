@@ -14,7 +14,7 @@ curl -sSL https://raw.githubusercontent.com/Yamayamaaya/Rel/main/install.sh | zs
 If you are using bash, run the following command instead:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/Yamayamaaya/Rel/main/install.sh |  | bash
+curl -sSL https://raw.githubusercontent.com/Yamayamaaya/Rel/main/install.sh |  bash
 
 ```
 

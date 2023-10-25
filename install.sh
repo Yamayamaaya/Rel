@@ -5,7 +5,7 @@ if ! command -v tree &> /dev/null
 then
     echo "'tree' command could not be found. Installing..."
     # You might adjust the installation command based on the user's OS
-    sudo apt-get install tree
+    sudo brew install tree
 fi
 
 # Constants
