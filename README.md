@@ -1,4 +1,4 @@
-## Rel
+# Rel
 
 ### Description
 
@@ -22,34 +22,58 @@ This command will download the install.sh script and execute it, which will then
 
 ### Usage
 
-To use the CLI tool, you can run the rel command followed by the names of the files you want to search for. Here is the basic syntax:
-
 ```bash
-rel filename1 filename2 ...
+rel [-all] [-dir] <target1> <target2> ...
+rel <GitHub_Repository_URL> [-all] [-dir] <target1> <target2> ...
 ```
 
-Examples:
+#### **Options:**
 
--   To search for a single file:
+-   **-all** : Display the entire directory tree.
+-   **-dir** : Focus on directories; only specified files and directories will be displayed.
+
+#### **Arguments:**
+
+-   **<GitHub_Repository_URL>** : (Optional) The URL of a public GitHub repository to clone and visualize.
+-   **<target1> <target2> ...** : Names of the files or directories to focus on. Both file and directory names can be specified.
+
+#### **Examples:**
+
+1. **Visualizing Specific Files and Directories in a Local Directory:**
 
     ```bash
-    rel file1.txt
+    rel fileA.js directoryA
     ```
 
--   To search for multiple files:
+    This command will display the directory structure, focusing on `fileA.js` and `directoryA`, marking them with `<<-`.
+
+2. **Option:**
 
     ```bash
-    rel file1.txt file2.txt file3.txt
+    rel -dir directoryA fileB.html
     ```
 
-The `rel` command will display a tree structure showing the locations of the specified files within the directory hierarchy.
+    This command focuses on `directoryA` and `fileB.html`, displaying them along with their hierarchical structures.
 
-### Contributing
+3. **Option with Specific Files:**
+
+    ```bash
+    rel -all fileC.txt
+    ```
+
+    This command displays the entire directory tree and marks `fileC.txt` with `<<-`.
+
+4. **Cloning and Visualizing a GitHub Repository:**
+
+    ```bash
+    rel https://github.com/user/repository -all
+    ```
+
+    This command clones the specified GitHub repository, displays its entire directory structure, and then removes the cloned repository.
 
 ### License
 
 ### Authors
 
-### Acknowledgments
-
-### Reporting Bugs
+-   Yamayamaaya
+-   yugo139013@gmail.com
