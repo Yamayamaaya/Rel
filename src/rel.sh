@@ -13,6 +13,14 @@ spin() {
     done
 }
 
+end_spin() {
+    local SPIN_PID=$1
+    kill $SPIN_PID
+    sleep 1
+    kill -9 $SPIN_PID 2>/dev/null
+    echo -ne "\r\033[K"
+}
+
 execute_tree() {
     case $OPTION in
         -all)
@@ -55,14 +63,12 @@ if [[ $1 == https://github.com/* ]]; then
     SPIN_PID=$!
 
     if ! git clone --quiet "$REPO_URL" "$TEMP_DIR"; then
-        kill -9 $SPIN_PID
+        end_spin $SPIN_PID
         echo -e "\rError: Failed to clone the repository."
         exit 1
     fi
 
-    kill -9 $SPIN_PID
-    wait $SPIN_PID 2>/dev/null
-    echo -ne "\r\033[K"
+    end_spin $SPIN_PID
 
     cd "$TEMP_DIR" || { echo "Error: Failed to change directory."; exit 1; }
 fi
@@ -90,14 +96,9 @@ SEARCH_PATTERN="${SEARCH_PATTERN:1}"
 spin "Searching for files..." & 
 SPIN_PID=$!
 
-TEMP_FILE=$(mktemp)
-execute_tree > $TEMP_FILE
-TREE_OUTPUT=$(< $TEMP_FILE)
-rm $TEMP_FILE
+TREE_OUTPUT=$(execute_tree)
 
-kill -9 $SPIN_PID 
-wait $SPIN_PID 2>/dev/null
-echo -ne "\r\033[K"
+end_spin $SPIN_PID
 
 echo "$TREE_OUTPUT"
 
