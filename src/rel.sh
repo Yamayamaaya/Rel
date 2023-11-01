@@ -2,6 +2,18 @@
 
 # Functions
 
+# シグナルハンドラ
+cleanup() {
+    # 一時ディレクトリが存在する場合は削除
+    [[ -n $TEMP_DIR ]] && rm -rf "$TEMP_DIR"
+    # スピンローダーのプロセスが存在する場合は終了
+    [[ -n $SPIN_PID ]] &&  end_spin $SPIN_PID
+    echo "Exiting."
+    exit 1
+}
+
+
+
 spin() {
     local message=$1
     local -a spinner=('⠋' '⠙' '⠹' '⠸' '⠼' '⠴' '⠦' '⠧' '⠇' '⠏')
@@ -62,6 +74,9 @@ execute_tree() {
             ;;
     esac
 }
+
+# SIGINTシグナル（Ctrl+C）を受信した場合にcleanup関数を実行
+trap cleanup SIGINT
 
 # Check if 'tree' command is installed
 if ! command -v tree &> /dev/null; then
