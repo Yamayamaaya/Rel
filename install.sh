@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Check if Homebrew is installed
+if ! command -v brew &> /dev/null
+then
+    echo "Error: Homebrew is not installed on your system."
+    echo "Please install Homebrew first by following the instructions at https://brew.sh/"
+    exit 1
+fi
+
 # Check if the 'tree' command is installed
 if ! command -v tree &> /dev/null
 then

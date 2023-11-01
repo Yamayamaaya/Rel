@@ -21,6 +21,19 @@ end_spin() {
     echo -ne "\r\033[K"
 }
 
+show_help() {
+    echo "Usage: rel [-h] [-all] [-dir] [<GitHub_Repository_URL>] <target1> <target2> ..."
+    echo ""
+    echo "Options:"
+    echo "  -h                  Show this help message and exit."
+    echo "  -all                Display the entire directory tree."
+    echo "  -dir                Focus on directories; only specified files and directories will be displayed."
+    echo ""
+    echo "Arguments:"
+    echo "  <GitHub_Repository_URL>  (Optional) The URL of a public GitHub repository to clone and visualize."
+    echo "  <target1> <target2> ...  Names of the files or directories to focus on. Both file and directory names can be specified."
+}
+
 execute_tree() {
     case $OPTION in
         -all)
@@ -36,6 +49,9 @@ execute_tree() {
             else
                 tree -F -P "$SEARCH_PATTERN" --matchdirs | sed -E "/($SEARCH_PATTERN)/s//\1 <<-/"
             fi
+            ;;
+        -h)
+            show_help
             ;;
         *)
             if [ -z "$SEARCH_PATTERN" ]; then
@@ -93,7 +109,12 @@ done
 SEARCH_PATTERN="${SEARCH_PATTERN:1}"
 
 # Display spinner while searching for files
-spin "Searching for files..." & 
+if [[ $OPTION == -h ]]; then
+    spin "Loading..." &
+else
+    spin "Searching for files..." &
+fi
+
 SPIN_PID=$!
 
 TREE_OUTPUT=$(execute_tree)
